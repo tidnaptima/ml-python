@@ -1,0 +1,17 @@
+import numpy as np
+#from sklearn import datasets
+from sklearn.feature_selection import RFE
+from sklearn.linear_model import LogisticRegression
+# load the diabetes datasets
+f = open("pima-indians-diabetes.data.txt")
+data = np.loadtxt(f)
+X = data[:, :7]  # select columns 1 through end
+Y = data[:, 8]   # select column 
+# create a base classifier used to evaluate a subset of attributes
+model = LogisticRegression()
+# create the RFE model and select 4 attributes
+rfe = RFE(model, 4)
+rfe = rfe.fit(X, Y)
+# summarize the selection of the attributes
+print(rfe.support_)
+print(rfe.ranking_)
